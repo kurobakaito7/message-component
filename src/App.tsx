@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import { MessageProvider, MessageRef } from "./Message";
+import { useMessage } from "./Message/useMessage";
+import { ConfigProvider } from "./Message/ConfigProvider";
+
+function Test() {
+  const message = useMessage();
+
+  return (
+    <div>
+      <button onClick={() => {
+        message.add({
+          content: '请求成功'
+        })
+      }}>click</button>
+    </div>
+  );
+}
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider>
+      <div>
+        <Test></Test>
+      </div>
+    </ConfigProvider>  
   );
 }
 
